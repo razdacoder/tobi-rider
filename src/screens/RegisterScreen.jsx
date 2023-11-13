@@ -47,7 +47,7 @@ const RegisterScreen = () => {
   return (
     <div className="flex justify-center flex-col items-center h-screen">
       <div className="flex flex-col justify-center items-center gap-y-4 flex-1">
-        <MdLocalTaxi size={80} className="text-green-500" />
+        <MdLocalTaxi size={80} className="text-blue-500" />
       </div>
       <div className="flex flex-col w-full px-5">
         <h3 className="text-2xl font-semibold text-neutral-800 mb-2">
@@ -69,7 +69,7 @@ const RegisterScreen = () => {
               onChange={(e) =>
                 setForm((form) => ({ ...form, name: e.target.value }))
               }
-              className="w-full border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-green-500 outline-none text-lg"
+              className="w-full border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-blue-500 outline-none text-lg"
               type="text"
               placeholder="Name"
               id="fullname"
@@ -86,7 +86,7 @@ const RegisterScreen = () => {
               onChange={(e) =>
                 setForm((form) => ({ ...form, email: e.target.value }))
               }
-              className="w-full mb-3 border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-green-500 outline-none text-lg"
+              className="w-full mb-3 border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-blue-500 outline-none text-lg"
               type="email"
               placeholder="Email"
               id="email"
@@ -103,13 +103,13 @@ const RegisterScreen = () => {
               onChange={(e) =>
                 setForm((form) => ({ ...form, password: e.target.value }))
               }
-              className="w-full border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-green-500 outline-none text-lg"
+              className="w-full border-2 border-neutral-500 px-4 py-[10px] rounded-md focus:border-blue-500 outline-none text-lg"
               type="password"
               placeholder="Password"
               id="password"
             />
           </div>
-          <button className="w-full mt-5 bg-green-500 px-6 py-3 mb-3 rounded-md text-white font-semibold text-lg">
+          <button className="w-full mt-5 bg-blue-500 px-6 py-3 mb-3 rounded-md text-white font-semibold text-lg">
             {loading ? <Spinner /> : "Register"}
           </button>
           <div className="flex justify-center items-center">
