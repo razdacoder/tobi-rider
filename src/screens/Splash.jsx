@@ -16,7 +16,7 @@ const Splash = () => {
   return (
     <div className="bg-hero flex justify-center flex-col items-center h-full">
       <MdElectricBike size={80} className="text-green-500" />
-      <h3 className="text-3xl font-bold text-blue-500">Tobi Driver</h3>
+      <h3 className="text-3xl font-bold text-white">Tobi Ride</h3>
     </div>
   );
 };
