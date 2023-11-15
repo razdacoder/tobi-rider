@@ -14,8 +14,7 @@ const Splash = () => {
     setTimeout(() => checkFirstLogin(), 5000);
   }, []);
   return (
-    <div className="flex justify-center flex-col items-center h-full">
-      <MdLocalTaxi className="text-blue-500" size={80} />
+    <div className="bg-hero flex justify-center flex-col items-center h-full">
       <h3 className="text-3xl font-bold text-blue-500">Polyride</h3>
     </div>
   );

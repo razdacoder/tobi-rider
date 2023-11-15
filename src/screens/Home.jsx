@@ -54,12 +54,12 @@ const DestinationCard = ({ name, icon, active, callback }) => {
   return (
     <button
       onClick={callback}
-      className={`w-24 h-24 rounded-full ${
-        active ? "bg-blue-400" : "border border-blue-400"
-      }  p-1 flex flex-col mb-3 justify-center items-center gap-y-2`}
+      className={`w-full py-2 rounded-sm ${
+        active ? "bg-green-400" : "border border-green-400"
+      }  p-1 flex mb-3 px-3 items-center gap-x-2`}
     >
       {icon}
-      <h6 className="text-lg">{name}</h6>
+      <h6 className="text-sm">{name}</h6>
     </button>
   );
 };
@@ -167,28 +167,46 @@ const Home = () => {
 
   return (
     <div className="h-screen flex flex-col relative">
-      <div className="absolute z-30 flex w-full p-2 top-3">
+      <div className="absolute z-30 flex w-full items-center p-2 top-3">
         <button
           onClick={() => navigate("/history")}
           className=" flex justify-center items-center bg-white shadow-lg p-2 mr-2 rounded-full"
         >
           <MdMenu size={30} />
         </button>
-        <select
-          name=""
-          id=""
-          onChange={(e) => setMyLocation(e.target.value)}
-          className="flex-1 bg-white px-2 rounded-md shadow-lg w-full"
-        >
-          <option disabled value="">
-            Where are you?
-          </option>
-          {locations.map((location, index) => (
-            <option key={location.title} value={location.title}>
-              {location.title}
+        <div className="flex flex-1 flex-col gap-y-2 w-full">
+          <select
+            name=""
+            id=""
+            onChange={(e) => setMyLocation(e.target.value)}
+            className=" bg-white p-2 rounded-md shadow-lg w-full"
+          >
+            <option disabled value="">
+              Where are you?
             </option>
-          ))}
-        </select>
+            {locations.map((location, index) => (
+              <option key={location.title} value={location.title}>
+                {location.title}
+              </option>
+            ))}
+          </select>
+          <select
+            name=""
+            id=""
+            onChange={(e) => setactiveDestination(e.target.value)}
+            className=" bg-white p-2 rounded-md shadow-lg w-full"
+          >
+            <option disabled value="">
+              Where to?
+            </option>
+            {locations.map((location, index) => (
+              <option key={location.title} value={location.title}>
+                {location.icon}
+                {location.title}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       {driverInfo && (
         <div className="absolute z-30 top-20 right-0 w-48 shadow-md bg-white rounded-sm p-2">
@@ -200,12 +218,12 @@ const Home = () => {
         </div>
       )}
 
-      <div className="h-[55%]">
+      <div className="h-full">
         <RideMap destination={locations[activeDestination]} />
       </div>
-      <div className="h-[45%] px-5">
-        <h4 className="text-xl text-bold pt-8 mb-3">What your destination?</h4>
-        <div className="flex flex-wrap justify-between">
+
+      {/* <h4 className="text-xl text-bold pt-2 mb-3">Where to?</h4>
+        <div className="overflow-y-scroll h-2/3">
           {locations.map((location, index) => (
             <DestinationCard
               key={index}
@@ -215,18 +233,24 @@ const Home = () => {
               icon={location.icon}
             />
           ))}
-        </div>
+        </div> */}
 
+      <div className="absolute px-3 w-full bottom-10 left-0">
         <button
           onClick={requestRide}
           disabled={
             loading ||
             newRequest ||
             currentRide?.status === "on-route" ||
+            currentRide?.status === "arrived" ||
             currentRide?.status === "picked-up" ||
             currentRide?.status === "payment"
           }
-          className="w-full bg-blue-800 py-4 rounded-md disabled:bg-gray-400 text-white text-lg"
+          className={`w-full bg-green-800 py-4 rounded-md ${
+            currentRide?.status === "arrived"
+              ? "disabled:bg-yellow-400"
+              : "disabled:bg-gray-400"
+          } text-white text-lg`}
         >
           {loading ? (
             <Spinner />
@@ -234,12 +258,14 @@ const Home = () => {
             "You have an ongoing request"
           ) : currentRide?.status === "on-route" ? (
             "Your Driver is on the way"
+          ) : currentRide?.status === "arrived" ? (
+            "Your driver is here"
           ) : currentRide?.status === "picked-up" ? (
             "You are now on route"
           ) : currentRide?.status === "payment" ? (
             "Destination Reached Make Payment"
           ) : (
-            "Request Driver"
+            "Send Ride Request"
           )}
         </button>
       </div>
