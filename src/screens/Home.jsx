@@ -200,8 +200,8 @@ const Home = () => {
               Where to?
             </option>
             {locations.map((location, index) => (
-              <option key={location.title} value={location.title}>
-                {location.icon}
+              <option key={location.title} value={index}>
+                
                 {location.title}
               </option>
             ))}
